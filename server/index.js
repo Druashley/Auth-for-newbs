@@ -23,12 +23,14 @@ function notFound(req, res, next) {
 }
 
 function errorHandler(err, req, res, next) {
-  res.staus(res.statusCode || 500);
+  res.status(res.statusCode || 500);
   res.json({
     message: err.message,
     stack: err.stack,
   });
 }
+app.use(notFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
